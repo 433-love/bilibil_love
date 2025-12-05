@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilibili 视频疑惑指数排行榜</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">
+                    <i class="fas fa-chart-line"></i> Bilibili 疑惑指数排行榜
+                </h1>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="#overview" class="nav-link active"><i class="fas fa-home"></i> 概览</a></li>
+                        <li><a href="#rankings" class="nav-link"><i class="fas fa-trophy"></i> 排行榜</a></li>
+                        <li><a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> 关于</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main">
+        <!-- 概览和排行榜合并在同一页面 -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-pie"></i> Bilibili 疑惑指数排行榜
+                </h2>
+                
+                <!-- 概览卡片 -->
+                <div class="overview-section">
+                    <h3 class="overview-title">数据概览</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number" id="total-videos">0</h3>
+                                <p class="stat-label">总视频数</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-comment-dots"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number" id="average-confusion">0.00</h3>
+                                <p class="stat-label">平均疑惑指数</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number" id="max-questions">0</h3>
+                                <p class="stat-label">最多问号数</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number" id="max-confusion">0.00</h3>
+                                <p class="stat-label">最高疑惑指数</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 图表部分 - 可选显示 -->
+                    <div class="chart-container" style="height: 300px;">
+                        <h3 class="chart-title">疑惑指数分布</h3>
+                        <canvas id="confusion-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 筛选和排序 -->
+                <div class="filter-container">
+                    <div class="filter-group">
+                        <label for="sort-type" class="filter-label">
+                            <i class="fas fa-sort"></i> 排序方式：
+                        </label>
+                        <select id="sort-type" class="filter-select">
+                            <option value="question_count">按问号数量</option>
+                            <option value="confusion_index" selected>按疑惑指数</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="show-count" class="filter-label">
+                            <i class="fas fa-sliders-h"></i> 显示数量：
+                        </label>
+                        <select id="show-count" class="filter-select">
+                            <option value="10" selected>10条</option>
+                            <option value="20">20条</option>
+                            <option value="50">50条</option>
+                            <option value="all">全部</option>
+                        </select>
+                    </div>
+                    <div class="search-group">
+                        <input type="text" id="search-input" class="search-input" placeholder="搜索视频标题...">
+                        <button id="search-btn" class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 排行榜列表 -->
+                <div class="rankings-container">
+                    <div class="rankings-header">
+                        <div class="rankings-col rank-col">排名</div>
+                        <div class="rankings-col info-col">视频信息</div>
+                        <div class="rankings-col stat-col">弹幕总数</div>
+                        <div class="rankings-col stat-col">问号数量</div>
+                        <div class="rankings-col stat-col">疑惑指数</div>
+                    </div>
+                    <div id="rankings-list" class="rankings-list">
+                        <!-- 排行榜内容将通过 JavaScript 动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部信息 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Bilibili 视频疑惑指数排行榜. 数据来源：Bilibili 热门视频弹幕分析.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript 文件 -->
+    <script src="script.js"></script>
+</body>
+</html>
