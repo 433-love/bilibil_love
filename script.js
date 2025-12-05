@@ -325,6 +325,11 @@ function createRankingItem(video, rank, index) {
     item.className = 'ranking-item';
     
     // 构建视频信息HTML - 使用真实视频封面
+    // 调试信息：记录前3个视频的封面URL
+    if (index < 3) {
+        console.log(`视频 #${rank} 封面URL:`, video.pic_url);
+    }
+    
     const html = `
         <div class="rankings-col rank-col">
             <div class="rank">${rank}</div>
@@ -332,7 +337,12 @@ function createRankingItem(video, rank, index) {
         <div class="rankings-col info-col">
             <div class="video-info">
                 <div class="video-thumbnail-container">
-                    <img src="${video.pic_url}" alt="${video.title}" class="video-thumbnail loaded" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2260%22 viewBox=%220 0 80 60%22%3E%3Crect width=%2280%22 height=%2260%22 fill=%22%23f0f0f0%22/%3E%3Ctext x=%2240%22 y=%2235%22 font-size=%2212%22 text-anchor=%22middle%22 fill=%22%23999%22%3E图片加载失败%3C/text%3E%3C/svg%3E';">
+                    <img src="${video.pic_url}" 
+                         alt="${video.title}" 
+                         class="video-thumbnail loaded" 
+                         referrerpolicy="no-referrer"
+                         crossorigin="anonymous"
+                         onerror="console.error('图片加载失败:', this.src); this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2260%22 viewBox=%220 0 80 60%22%3E%3Crect width=%2280%22 height=%2260%22 fill=%22%23f0f0f0%22/%3E%3Ctext x=%2240%22 y=%2235%22 font-size=%2212%22 text-anchor=%22middle%22 fill=%22%23999%22%3E封面加载失败%3C/text%3E%3C/svg%3E';">
                 </div>
                 <div class="video-details">
                     <h4 class="video-title">${video.title}</h4>

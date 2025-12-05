@@ -122,12 +122,21 @@ def get_video_detail(bvid):
             return None
         
         video_data = data['data']
+        # 处理封面URL，确保使用HTTPS协议
+        pic_url = video_data['pic']
+        if pic_url.startswith('//'):
+            pic_url = 'https:' + pic_url
+        elif pic_url.startswith('http://'):
+            pic_url = pic_url.replace('http://', 'https://')
+        elif not pic_url.startswith('http'):
+            pic_url = 'https://' + pic_url
+        
         detail = {
             'bvid': video_data['bvid'],
             'aid': video_data['aid'],
             'cid': video_data['cid'],
             'title': video_data['title'],
-            'pic_url': video_data['pic'].replace('http://', 'https://'),  # 将HTTP改为HTTPS
+            'pic_url': pic_url,
             'total_danmaku': video_data['stat']['danmaku']  # 获取弹幕总数
         }
         logger.info(f"成功获取视频{bvid}详情: {detail['title']} (弹幕数: {detail['total_danmaku']})")
