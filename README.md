@@ -167,7 +167,6 @@ HEADERS = {
 
 ## 联系方式
 
-- 项目地址：https://github.com/yourusername/bilibili-confusion-index](https://github.com/433-love/bilibil_love
 - 作者：Love433
 - 邮箱：2832490995@qq.com
 
