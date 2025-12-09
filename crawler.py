@@ -21,7 +21,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def get_popular_videos(total=1000):
+def get_popular_videos(total=600):
     """
     获取热门视频列表
     :param total: 要获取的视频总数
@@ -295,7 +295,7 @@ def print_rankings(rankings, sort_by='question_count'):
     print("="*80 + "\n")
 
 
-def crawl_videos(total=1000):
+def crawl_videos(total=600):
     """
     执行视频数据采集
     :param total: 要抓取的视频总数
@@ -358,7 +358,7 @@ def crawl_videos(total=1000):
     logger.info(f"B站视频数据采集器执行完成，共处理 {processed_count} 个视频，跳过 {skipped_count} 个弹幕数不足的视频")
 
 
-def start_scheduled_crawling(total=1000, interval=30):
+def start_scheduled_crawling(total=600, interval=60):
     """
     启动定时爬虫
     :param total: 每次要抓取的视频总数
